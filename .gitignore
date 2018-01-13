@@ -1,0 +1,3 @@
+mongo/db/*
+node_modules
+TODO.txt
