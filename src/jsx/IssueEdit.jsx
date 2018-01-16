@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {URLManager,DateManager} from './Utils.jsx';
 import {NumInput} from './Inputs.jsx';
+import './../less/edit.less'
 
 export default class IssueEdit extends React.Component{
   constructor(){

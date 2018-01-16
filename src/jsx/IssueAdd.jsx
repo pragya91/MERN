@@ -21,7 +21,9 @@ export default class IssueAdd extends React.Component{
   render(){
     return (
       <form name="issueAdd" onSubmit={this.handleSubmit}>
+        Owner:
         <input name="owner" placeholder ="owner"/>
+        Title:
         <input name="title" placeholder ="title"/>
         <button type="submit">Add</button>
       </form>

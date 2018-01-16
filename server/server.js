@@ -83,7 +83,7 @@ app.delete('/api/issues/:id',(req,res)=>{
       res.json({status : 'Warning: object not found'});
     }
   }).catch(err => {
-    res.status(500).json({message: `Internal server error: ${err}`})
+    res.status(500).json({message: `Internal server error: ${err}`});
   });
 
 });

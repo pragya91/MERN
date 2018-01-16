@@ -77,6 +77,7 @@ class IssueList extends React.Component{
     this.props.history.push(this.props.location.pathname + filter);
   }
   loadData(){
+    console.log("aaaaa");
     let self = this;
     let getIssues = new Promise(function(resolve, reject){
         let xhr = new XMLHttpRequest();

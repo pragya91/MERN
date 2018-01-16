@@ -1,6 +1,88 @@
 webpackJsonp([0],{
 
-/***/ 36:
+/***/ 22:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var QueryUtil = exports.QueryUtil = function () {
+  function QueryUtil() {
+    _classCallCheck(this, QueryUtil);
+  }
+
+  _createClass(QueryUtil, null, [{
+    key: "getQueryValue",
+    value: function getQueryValue(queryStr, key) {
+      if (!queryStr || queryStr.length == 0) return false;
+      if (queryStr[0] == "?") queryStr = queryStr.substr(queryStr.length - 2);
+
+      var keyVals = queryStr.split("&");
+      keyVals = keyVals.map(function (cur) {
+        var curKeyVal = [];
+        curKeyVal = cur.split("=");
+        var curObj = {};
+        curObj[curKeyVal[0]] = curKeyVal[1];
+        return curObj;
+      });
+      var queryObj = Object.assign.apply(Object, [{}].concat(_toConsumableArray(keyVals)));
+      return queryObj[key];
+    }
+  }]);
+
+  return QueryUtil;
+}();
+
+var URLManager = exports.URLManager = function () {
+  function URLManager() {
+    _classCallCheck(this, URLManager);
+  }
+
+  _createClass(URLManager, null, [{
+    key: "URL_SERVER_PREFIX",
+    get: function get() {
+      return "http://localhost:3000/api";
+    }
+  }, {
+    key: "URL_ISSUES",
+    get: function get() {
+      return "http://localhost:3000/api/issues";
+    }
+  }]);
+
+  return URLManager;
+}();
+
+var DateManager = exports.DateManager = function () {
+  function DateManager() {
+    _classCallCheck(this, DateManager);
+  }
+
+  _createClass(DateManager, null, [{
+    key: "formatDate",
+    value: function formatDate(d) {
+      console.log("oooooooo" + d.getDate());
+      var datestring = d.getFullYear() + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + ("0" + d.getDate()).slice(-2);
+      return datestring;
+    }
+  }]);
+
+  return DateManager;
+}();
+
+/***/ }),
+
+/***/ 37:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10,24 +92,33 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(22);
+var _reactDom = __webpack_require__(23);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouterDom = __webpack_require__(8);
 
-var _IssueList = __webpack_require__(75);
+__webpack_require__(76);
+
+var _bug = __webpack_require__(77);
+
+var _bug2 = _interopRequireDefault(_bug);
+
+var _IssueList = __webpack_require__(78);
 
 var _IssueList2 = _interopRequireDefault(_IssueList);
 
-var _IssueEdit = __webpack_require__(79);
+var _IssueEdit = __webpack_require__(81);
 
 var _IssueEdit2 = _interopRequireDefault(_IssueEdit);
 
+var _Home = __webpack_require__(84);
+
+var _Home2 = _interopRequireDefault(_Home);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var contentNode = document.getElementById("content");
-
+var contentNode = document.getElementById("container");
 var NoMatch = function NoMatch() {
   return _react2.default.createElement(
     'p',
@@ -38,46 +129,84 @@ var NoMatch = function NoMatch() {
 
 var App = function App() {
   return _react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(
-      'div',
-      { className: 'header' },
-      _react2.default.createElement(
-        'h1',
-        null,
-        'Issue Tracker'
-      )
-    ),
-    _react2.default.createElement(
-      'div',
-      { className: 'content' },
-      _react2.default.createElement(RoutedApp, null)
-    ),
-    _react2.default.createElement(
-      'div',
-      { className: 'footer' },
-      'Footer goes here.'
-    )
-  );
-};
-
-var RoutedApp = function RoutedApp() {
-  return _react2.default.createElement(
     _reactRouterDom.BrowserRouter,
     null,
     _react2.default.createElement(
       'div',
-      null,
+      { className: 'app' },
       _react2.default.createElement(
-        _reactRouterDom.Switch,
-        null,
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
-            return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/issues' });
-          } }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/issues/:id', component: _IssueEdit2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/issues', component: _IssueList2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '*', component: NoMatch })
+        'div',
+        { className: 'header' },
+        _react2.default.createElement(
+          _reactRouterDom.NavLink,
+          { to: '/home', className: 'home-link' },
+          _react2.default.createElement('img', { src: _bug2.default, alt: 'logo' }),
+          'Issue Tracker'
+        ),
+        _react2.default.createElement(
+          'nav',
+          null,
+          _react2.default.createElement(
+            'ul',
+            null,
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                _reactRouterDom.NavLink,
+                { to: '/issues', activeClassName: 'selected-tab' },
+                'All Issues'
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                _reactRouterDom.NavLink,
+                { to: '/contributors', activeClassName: 'selected-tab' },
+                'Contributors'
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                _reactRouterDom.NavLink,
+                { to: '/contact-us', activeClassName: 'selected-tab' },
+                'Contact Us'
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                _reactRouterDom.NavLink,
+                { to: '/about', activeClassName: 'selected-tab' },
+                'About'
+              )
+            )
+          )
+        )
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'content' },
+        _react2.default.createElement(
+          _reactRouterDom.Switch,
+          null,
+          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
+              return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/home' });
+            } }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/issues/:id', component: _IssueEdit2.default }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/issues', component: _IssueList2.default }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/home', component: _Home2.default }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '*', component: NoMatch })
+        )
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'footer' },
+        'Footer goes here.'
       )
     )
   );
@@ -87,7 +216,21 @@ _reactDom2.default.render(_react2.default.createElement(App, null), contentNode)
 
 /***/ }),
 
-/***/ 75:
+/***/ 76:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 77:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "imgs/bug.png";
+
+/***/ }),
+
+/***/ 78:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -105,15 +248,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(8);
 
-var _IssueAdd = __webpack_require__(76);
+var _IssueAdd = __webpack_require__(79);
 
 var _IssueAdd2 = _interopRequireDefault(_IssueAdd);
 
-var _IssueFilter = __webpack_require__(77);
+var _IssueFilter = __webpack_require__(80);
 
 var _IssueFilter2 = _interopRequireDefault(_IssueFilter);
 
-var _Utils = __webpack_require__(81);
+var _Utils = __webpack_require__(22);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -285,6 +428,7 @@ var IssueList = function (_React$Component) {
   }, {
     key: 'loadData',
     value: function loadData() {
+      console.log("aaaaa");
       var self = this;
       var getIssues = new Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest();
@@ -387,7 +531,7 @@ exports.default = (0, _reactRouterDom.withRouter)(IssueList);
 
 /***/ }),
 
-/***/ 76:
+/***/ 79:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -442,7 +586,9 @@ var IssueAdd = function (_React$Component) {
       return _react2.default.createElement(
         'form',
         { name: 'issueAdd', onSubmit: this.handleSubmit },
+        'Owner:',
         _react2.default.createElement('input', { name: 'owner', placeholder: 'owner' }),
+        'Title:',
         _react2.default.createElement('input', { name: 'title', placeholder: 'title' }),
         _react2.default.createElement(
           'button',
@@ -460,7 +606,7 @@ exports.default = IssueAdd;
 
 /***/ }),
 
-/***/ 77:
+/***/ 80:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -478,7 +624,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(8);
 
-var _Utils = __webpack_require__(81);
+var _Utils = __webpack_require__(22);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -647,7 +793,7 @@ render(){
 
 /***/ }),
 
-/***/ 79:
+/***/ 81:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -669,9 +815,11 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRouterDom = __webpack_require__(8);
 
-var _Utils = __webpack_require__(81);
+var _Utils = __webpack_require__(22);
 
 var _Inputs = __webpack_require__(82);
+
+__webpack_require__(83);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -882,88 +1030,6 @@ exports.default = IssueEdit;
 
 /***/ }),
 
-/***/ 81:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var QueryUtil = exports.QueryUtil = function () {
-  function QueryUtil() {
-    _classCallCheck(this, QueryUtil);
-  }
-
-  _createClass(QueryUtil, null, [{
-    key: "getQueryValue",
-    value: function getQueryValue(queryStr, key) {
-      if (!queryStr || queryStr.length == 0) return false;
-      if (queryStr[0] == "?") queryStr = queryStr.substr(queryStr.length - 2);
-
-      var keyVals = queryStr.split("&");
-      keyVals = keyVals.map(function (cur) {
-        var curKeyVal = [];
-        curKeyVal = cur.split("=");
-        var curObj = {};
-        curObj[curKeyVal[0]] = curKeyVal[1];
-        return curObj;
-      });
-      var queryObj = Object.assign.apply(Object, [{}].concat(_toConsumableArray(keyVals)));
-      return queryObj[key];
-    }
-  }]);
-
-  return QueryUtil;
-}();
-
-var URLManager = exports.URLManager = function () {
-  function URLManager() {
-    _classCallCheck(this, URLManager);
-  }
-
-  _createClass(URLManager, null, [{
-    key: "URL_SERVER_PREFIX",
-    get: function get() {
-      return "http://localhost:3000/api";
-    }
-  }, {
-    key: "URL_ISSUES",
-    get: function get() {
-      return "http://localhost:3000/api/issues";
-    }
-  }]);
-
-  return URLManager;
-}();
-
-var DateManager = exports.DateManager = function () {
-  function DateManager() {
-    _classCallCheck(this, DateManager);
-  }
-
-  _createClass(DateManager, null, [{
-    key: "formatDate",
-    value: function formatDate(d) {
-      console.log("oooooooo" + d.getDate());
-      var datestring = d.getFullYear() + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + ("0" + d.getDate()).slice(-2);
-      return datestring;
-    }
-  }]);
-
-  return DateManager;
-}();
-
-/***/ }),
-
 /***/ 82:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1075,7 +1141,51 @@ export class DateInput extends React.Component{
 }
 */
 
+/***/ }),
+
+/***/ 83:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 84:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Home = void 0;
+
+exports.default = Home = function Home() {
+  return _react2.default.createElement(
+    "div",
+    { className: "home" },
+    _react2.default.createElement(
+      "p",
+      null,
+      "An issue tracking system (also ITS, trouble ticket system, support ticket, request management or incident ticket system) is a computer software package that manages and maintains lists of issues, as needed by an organization. Issue tracking systems are commonly used in an organization's customer support call center to create, update, and resolve reported customer issues, or even issues reported by that organization's other employees. A support ticket should include vital information for the account involved and the issue encountered. An issue tracking system often also contains a knowledge base containing information on each customer, resolutions to common problems, and other such data. An issue tracking system is similar to a \"bugtracker\", and often, a software company will sell both, and some bugtrackers are capable of being used as an issue tracking system, and vice versa."
+    ),
+    _react2.default.createElement(
+      "a",
+      { href: "/issues" },
+      "Get Started"
+    )
+  );
+};
+
 /***/ })
 
-},[36]);
+},[37]);
 //# sourceMappingURL=app.bundle.js.map
