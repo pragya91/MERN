@@ -135,8 +135,8 @@ var App = function App() {
       'div',
       { className: 'app' },
       _react2.default.createElement(
-        'div',
-        { className: 'header' },
+        'header',
+        null,
         _react2.default.createElement(
           _reactRouterDom.NavLink,
           { to: '/home', className: 'home-link' },

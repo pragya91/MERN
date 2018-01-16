@@ -14,16 +14,22 @@
 }
 body {
   font-family: 'Aleo';
+  margin: 0 auto;
+  width: 960px;
 }
-.header .home-link {
+a {
+  text-decoration: none;
+  color: #373535;
+}
+header .home-link {
   display: block;
 }
-.header .home-link img {
+header .home-link img {
   width: 40px;
   height: 40px;
 }
-.header a {
-  text-decoration: none;
+header a {
+  color: #0099e6;
   display: inline-block;
 }
 nav {
@@ -38,7 +44,8 @@ nav ul li {
   padding: 0 10px;
 }
 nav .selected-tab {
-  color: grey;
+  color: #0066cc;
+  text-decoration: underline;
 }
 table.bordered-table {
   border-collapse: collapse;

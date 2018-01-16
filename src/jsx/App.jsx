@@ -14,7 +14,7 @@ const NoMatch = () => (<p>No match found</p>);
 const App = () => (
   <BrowserRouter>
     <div className="app">
-      <div className="header">
+      <header>
           <NavLink to={'/home'} className="home-link" >
             <img src={logo} alt="logo"/>Issue Tracker
           </NavLink>
@@ -26,7 +26,7 @@ const App = () => (
               <li><NavLink to={'/about'} activeClassName="selected-tab">About</NavLink></li>
             </ul>
           </nav>
-      </div>
+      </header>
 
       <div className="content">
         <Switch>

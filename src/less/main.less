@@ -20,10 +20,20 @@
   font-weight: bold;
   font-style: normal;
 }
+
+@heading-color:	#0099e6;
+@selection-blue: #0066cc;
+
 body{
   font-family: 'Aleo';
+  margin: 0 auto;
+  width: 960px;
 }
-.header{
+a{
+  text-decoration: none;
+  color: #373535;
+}
+header{
   .home-link{
     display: block;
   }
@@ -32,7 +42,7 @@ body{
     height: 40px;
   }
   a{
-    text-decoration: none;
+    color: @heading-color;
     display: inline-block;
   }
 }
@@ -48,7 +58,8 @@ nav{
     }
   }
   .selected-tab{
-    color: grey;
+    color: @selection-blue;
+    text-decoration: underline;
   }
 }
 
