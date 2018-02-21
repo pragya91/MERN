@@ -1,7 +1,7 @@
 Splitting client code
 ---------------------
-- We need to use webpack to merge all the js files into one. But webpack cannot handle
-jsx transformations, so we also use babel-loader.
+- We need to use webpack to merge all the js files into one. But for webpack to handle
+jsx transformations, we also need to use babel-loader.
 
 - npm install --save-dev webpack
 - npm install --save-dev babel-loader
